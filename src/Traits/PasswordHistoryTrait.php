@@ -18,7 +18,7 @@ trait PasswordHistoryTrait
     public function deletePasswordHistory()
     {
         $this->passwordHistory()
-            ->where('id', '<=', $this->passwordHistory()->first()->id - config('password-history.keep'))
+            ->where('id', '<=', $this->passwordHistory()->first()->id - config('password-history-validation.keep'))
             ->delete();
     }
 }

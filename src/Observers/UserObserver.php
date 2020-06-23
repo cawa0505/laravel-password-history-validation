@@ -9,15 +9,15 @@ class UserObserver
 {
     public function updated($user)
     {
-        $configPasswordColumn = config('password-history.observe.column');
+        $configPasswordColumn = config('password-history-validation.observe.column');
         if ($password = Arr::get($user->getChanges(), $configPasswordColumn)) {
-            PasswordHistoryRepo::storeCurrentPasswordInHistory($password, $user->id);
+            PasswordHistoryRepo::storeCurrentPasswordInHistory($password, $user->id, config('password-history-validation.observe.model'));
         }
     }
 
     public function created($user)
     {
-        $password = config('password-history.observe.column') ?? 'password';
-        PasswordHistoryRepo::storeCurrentPasswordInHistory($user->{$password}, $user->id);
+        $password = config('password-history-validation.observe.column') ?? 'password';
+        PasswordHistoryRepo::storeCurrentPasswordInHistory($user->{$password}, $user->id, config('password-history-validation.observe.model'));
     }
 }

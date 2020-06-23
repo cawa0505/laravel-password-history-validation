@@ -19,7 +19,7 @@ class NotFromPasswordHistory implements Rule
     public function __construct($user)
     {
         $this->user = $user;
-        $this->checkPrevious = config('password-history.keep');
+        $this->checkPrevious = config('password-history-validation.keep');
     }
 
     /**
@@ -27,7 +27,7 @@ class NotFromPasswordHistory implements Rule
      */
     public function passes($attribute, $value)
     {
-        $passwordHistories = PasswordHistoryRepo::fetchUser($this->user, $this->checkPrevious);
+        $passwordHistories = PasswordHistoryRepo::fetchUser(config('password-history-validation.observe.model'), $this->user, $this->checkPrevious);
         foreach ($passwordHistories as $passwordHistory) {
             if (Hash::check($value, $passwordHistory->password)) {
                 return false;

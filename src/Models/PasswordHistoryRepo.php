@@ -8,7 +8,7 @@ class PasswordHistoryRepo
      * @param $password
      * @param $user_id
      */
-    public static function storeCurrentPasswordInHistory($password, $user_id)
+    public static function storeCurrentPasswordInHistory($password, $user_id, $model)
     {
         PasswordHistory::create(get_defined_vars());
     }
@@ -19,8 +19,8 @@ class PasswordHistoryRepo
      *
      * @return mixed
      */
-    public static function fetchUser($user, $checkPrevious)
+    public static function fetchUser($model, $user, $checkPrevious)
     {
-        return PasswordHistory::where('user_id', $user->id)->latest()->take($checkPrevious)->get();
+        return PasswordHistory::whereModel($model)->where('user_id', $user->id)->latest()->take($checkPrevious)->get();
     }
 }

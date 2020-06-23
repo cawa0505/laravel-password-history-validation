@@ -13,8 +13,9 @@ class CreatePasswordHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('password-history.table'), function (Blueprint $table) {
+        Schema::create(config('password-history-validation.table'), function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('model');
             $table->integer('user_id');
             $table->string('password');
             $table->timestamps();
@@ -28,6 +29,6 @@ class CreatePasswordHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('password-history.table'));
+        Schema::dropIfExists(config('password-history-validation.table'));
     }
 }

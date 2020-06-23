@@ -13,9 +13,9 @@ class PasswordHistory extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->table = config('password-history.table');
+        $this->table = config('password-history-validation.table');
         parent::__construct($attributes);
     }
 
-    protected $fillable = ['user_id', 'password'];
+    protected $fillable = ['model', 'user_id', 'password'];
 }

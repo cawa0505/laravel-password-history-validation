@@ -24,7 +24,7 @@ class LaravelPasswordHistoryValidationServiceProvider extends ServiceProvider
                 ClearOldPasswordHistory::class,
             ]);
         }
-        $model = config('password-history.observe.model');
+        $model = config('password-history-validation.observe.model');
         class_exists($model) ? $model::observe(UserObserver::class) : null;
     }
 
@@ -35,6 +35,6 @@ class LaravelPasswordHistoryValidationServiceProvider extends ServiceProvider
     {
 
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/passwordHistory.php', 'password-history');
+        $this->mergeConfigFrom(__DIR__.'/../config/passwordHistory.php', 'password-history-validation');
     }
 }

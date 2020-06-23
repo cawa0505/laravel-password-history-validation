@@ -38,7 +38,7 @@ class ClearOldPasswordHistory extends Command
     public function handle()
     {
         $this->info('Getting Users...');
-        $model = config('password-history.observe.model');
+        $model = config('password-history-validation.observe.model');
         if (class_exists($model)) {
             $model::chunk(100, function ($users) {
                 $users->each->deletePasswordHistory();
