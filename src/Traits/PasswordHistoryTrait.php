@@ -11,8 +11,9 @@ trait PasswordHistoryTrait
      */
     public function passwordHistory()
     {
-        return $this->hasMany(PasswordHistory::class)
-            ->latest();
+        return $this->hasMany(PasswordHistory::class, 'user_id')
+            ->whereModel(config('password-history-validation.observe.model'))
+            ->latest('created_at');
     }
 
     public function deletePasswordHistory()
